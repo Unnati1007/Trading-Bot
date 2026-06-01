@@ -4,7 +4,7 @@
 ![Binance](https://img.shields.io/badge/Binance-API-yellow?style=for-the-badge&logo=binance)
 ![Status](https://img.shields.io/badge/Status-Success-brightgreen?style=for-the-badge)
 
-A robust, CLI-based Python trading bot that connects to the **Binance Futures Testnet**. It features fully interactive command-line prompts, robust validation, and detailed logging.
+A premium, highly polished CLI-based Python trading bot that connects to the **Binance Futures Testnet**. It features a stunning terminal UI, live ASCII price charts, automatic bracket orders, and a real-time portfolio dashboard.
 
 ---
 
@@ -15,10 +15,12 @@ trading_bot/
 ├── bot/
 │   ├── __init__.py          # Module initialization
 │   ├── client.py            # Binance API connection logic
-│   ├── orders.py            # Market and Limit order logic
+│   ├── orders.py            # Market, Limit, TP, and SL order logic
 │   ├── validators.py        # Input sanitization and checks
+│   ├── charts.py            # Terminal ASCII chart rendering
+│   ├── dashboard.py         # Live portfolio & PNL dashboard
 │   └── logging_config.py    # Log formatting and setup
-├── cli.py                   # Main CLI entry point
+├── cli.py                   # Main CLI entry point with Rich UI
 ├── requirements.txt         # Dependencies
 ├── .env                     # API Credentials
 └── README.md                # Documentation
@@ -26,9 +28,19 @@ trading_bot/
 
 ---
 
+## ✨ Features (The "Wow" Factor)
+
+- 🎨 **Gorgeous Terminal UI**: Built with `rich`, featuring colorful tables, loading spinners, and styled prompts.
+- 📈 **Live Terminal Price Charts**: Automatically fetches and draws a live 12.5-hour ASCII candlestick chart before you execute trades!
+- 🛡️ **Auto Bracket Orders**: Easily attach Take-Profit and Stop-Loss percentages to your orders (`--tp` & `--sl`).
+- 📊 **Live Portfolio Dashboard**: View your wallet balance, active positions, and unrealized PNL directly in the terminal (`--dashboard`).
+- 🛡️ **Smart Validation & Logging**: Safe error handling and comprehensive file logging (`trading_bot.log`).
+
+---
+
 ## ⚙️ Installation & Setup
 
-1. **Navigate to the folder**.
+1. **Clone the repository** and navigate to the folder.
 2. **Install Dependencies**:
    ```bash
    pip install -r requirements.txt
@@ -44,58 +56,32 @@ trading_bot/
 
 ## 💻 Usage & Commands
 
-You can run the bot in two modes: **Interactive Mode** (highly recommended) or **Direct Command Mode**.
-
-### ✨ 1. Interactive Mode (Bonus Feature)
-If you run the script without any arguments, it will interactively prompt you for all the details. 
-
+### 1. Interactive Mode (Highly Recommended)
+Run the script without arguments. It will draw a live price chart and prompt you for trade details.
 ```bash
 python cli.py
 ```
+*(You can also optionally add Take-Profit and Stop-Loss brackets during the prompts!)*
 
-**✅ Live Output Example:**
-![Order Success](screenshot.png)
-
-*(Note: To see the image above on GitHub or in your editor preview, just save the screenshot you took as `screenshot.png` inside this folder!)*
-
-<details>
-<summary><strong>View Terminal Text Output</strong></summary>
-
-```console
-PS C:\Users\HP\Desktop\CLI-based trading bot> python cli.py
-Enter symbol (e.g., BTCUSDT): BTCUSDT
-Enter side (BUY/SELL): BUY
-Enter order type (MARKET/LIMIT): MARKET
-Enter quantity: 0.01
-
-📊 Order Summary:
-{'symbol': 'BTCUSDT', 'side': 'BUY', 'type': 'MARKET', 'quantity': 0.01, 'price': None}
-
-✅ Order Success!
-Order ID: 13716089666
-Status: NEW
-Executed Qty: 0.0000
-```
-</details>
-
-### ⚡ 2. Direct Command Mode
-
-**Market Order:**
+### 2. Live Portfolio Dashboard
+Check your real-time PNL and active positions:
 ```bash
-python cli.py --symbol BTCUSDT --side BUY --type MARKET --quantity 0.01
+python cli.py --dashboard
 ```
+
+### 3. Direct Command Mode (with TP/SL)
+Execute orders instantly from your terminal, including advanced bracket orders:
+
+**Market Order with TP/SL:**
+```bash
+python cli.py --symbol BTCUSDT --side BUY --type MARKET --quantity 0.01 --tp 5 --sl 2
+```
+*(This places a market buy, sets a Take-Profit at +5%, and a Stop-Loss at -2%)*
 
 **Limit Order:**
 ```bash
 python cli.py --symbol BTCUSDT --side SELL --type LIMIT --quantity 0.01 --price 60000
 ```
-
----
-
-## 🛡️ Features & Validation
-- **Smart Validation**: Prevents invalid order types, negative quantities, and missing limit prices.
-- **Detailed Logging**: All actions and API responses are safely saved to `trading_bot.log`.
-- **Error Handling**: Gracefully catches Binance API errors (like invalid keys or insufficient balance) and displays them cleanly.
 
 ---
 
