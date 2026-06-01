@@ -54,8 +54,7 @@ python cli.py
 ```
 
 **✅ Live Output Example:**
-
-<img width="862" height="344" alt="Screenshot 2026-06-01 230408" src="https://github.com/user-attachments/assets/c562e791-70fe-415e-8250-e0e0ce828343" />
+<img width="942" height="870" alt="image" src="https://github.com/user-attachments/assets/b636b61a-1a70-463f-b729-2db32918b52e" />
 
 *(Note: To see the image above on GitHub or in your editor preview, just save the screenshot you took as `screenshot.png` inside this folder!)*
 
